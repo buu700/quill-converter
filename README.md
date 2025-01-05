@@ -1,5 +1,5 @@
 # quill-converter [![NPM version](https://img.shields.io/npm/v/quill-converter.svg)](https://www.npmjs.com/package/quill-converter)
-> Convert HTML to a Quill Delta or a Quill Delta to HTML
+> Convert text/HTML to a Quill Delta or a Quill Delta to text/HTML
 
 The purpose of this package is to assist in migrating to or from the [Quill editor](https://quilljs.com/).
 
@@ -21,6 +21,15 @@ let text = 'hello, world';
 let delta = convertTextToDelta(text);
 
 console.log(JSON.stringify(delta)); // {"ops":[{"insert":"hello, world\n"}]}
+```
+
+### Convert a Quill delta to a plain text string:
+```js
+const { convertDeltaToHtml } = require('quill-converter');
+
+let text = convertDeltaToText(delta);
+
+console.log(text) ; // 'hello, world'
 ```
 
 ### Convert a HTML string to a Quill delta:
