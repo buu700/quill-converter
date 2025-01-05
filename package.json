@@ -1,5 +1,5 @@
 {
-  "name": "node-quill-converter",
+  "name": "quill-converter",
   "version": "0.4.0",
   "description": "Convert HTML to Delta or Delta to HTML",
   "keywords": [
@@ -9,12 +9,12 @@
     "convert",
     "html"
   ],
-  "homepage": "https://github.com/joelcolucci/node-quill-converter",
+  "homepage": "https://github.com/buu700/quill-converter",
   "bugs": {
-    "url": "https://github.com/joelcolucci/node-quill-converter/issues"
+    "url": "https://github.com/buu700/quill-converter/issues"
   },
   "main": "./lib/index.js",
-  "author": "Joel Colucci",
+  "author": "Ryan Lester",
   "license": "MIT",
   "private": false,
   "scripts": {

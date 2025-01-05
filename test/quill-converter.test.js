@@ -3,7 +3,7 @@ const {
   convertHtmlToDelta,
   convertDeltaToHtml } = require('../lib/index.js');
 
-describe('node-quill-converter', () => {
+describe('quill-converter', () => {
   it('convertTextToDelta', () => {
     let text = 'hello, world';
     let deltaExpected = {ops: [{insert: 'hello, world\n'}]};
