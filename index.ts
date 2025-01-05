@@ -1,4 +1,13 @@
-const getQuill = typeof document === 'object' ?
+import type Quill from 'quill';
+import type {Delta, Op} from 'quill';
+
+/** Quill delta. */
+export interface IQuillDelta {
+	/** @see Op */
+	ops: Op[];
+}
+
+const getQuill: () => Quill = typeof document === 'object' ?
 	() => {
 		const div = document.createElement('div');
 		div.style.display = 'none';
@@ -30,33 +39,33 @@ const getQuill = typeof document === 'object' ?
 		return new DOM.window.Quill('#editor');
 	};
 
-const cache = {};
+let quill: Quill|undefined;
 
-exports.convertTextToDelta = (text) => {
-	if (!cache.quill) {
-		cache.quill = getQuill();
+export const convertTextToDelta = (text: string) : Delta => {
+	if (!quill) {
+		quill = getQuill();
 	}
 
-	const delta = cache.quill.clipboard.convert({text});
+	const delta = quill.clipboard.convert({text});
 	return delta;
 };
 
-exports.convertHtmlToDelta = (html) => {
-	if (!cache.quill) {
-		cache.quill = getQuill();
+export const convertHtmlToDelta = (html: string) : Delta => {
+	if (!quill) {
+		quill = getQuill();
 	}
 
-	const delta = cache.quill.clipboard.convert({html});
+	const delta = quill.clipboard.convert({html});
 	return delta;
 };
 
-exports.convertDeltaToHtml = (delta) => {
-	if (!cache.quill) {
-		cache.quill = getQuill();
+export const convertDeltaToHtml = (delta: IQuillDelta | Delta | Op[]) : string => {
+	if (!quill) {
+		quill = getQuill();
 	}
 
-	cache.quill.setContents(delta);
+	quill.setContents(<any> delta);
 
-	const html = cache.quill.getSemanticHTML();
+	const html = quill.getSemanticHTML();
 	return html;
 };
