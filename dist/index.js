@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertDeltaToHtml = exports.convertHtmlToDelta = exports.convertTextToDelta = void 0;
+exports.convertDeltaToText = exports.convertDeltaToHtml = exports.convertTextToDelta = exports.convertHtmlToDelta = void 0;
 var getQuill = typeof document === 'object' ?
     function () {
         var div = document.createElement('div');
@@ -22,14 +22,6 @@ var getQuill = typeof document === 'object' ?
         return new DOM.window.Quill('#editor');
     };
 var quill;
-var convertTextToDelta = function (text) {
-    if (!quill) {
-        quill = getQuill();
-    }
-    var delta = quill.clipboard.convert({ text: text });
-    return delta;
-};
-exports.convertTextToDelta = convertTextToDelta;
 var convertHtmlToDelta = function (html) {
     if (!quill) {
         quill = getQuill();
@@ -38,6 +30,14 @@ var convertHtmlToDelta = function (html) {
     return delta;
 };
 exports.convertHtmlToDelta = convertHtmlToDelta;
+var convertTextToDelta = function (text) {
+    if (!quill) {
+        quill = getQuill();
+    }
+    var delta = quill.clipboard.convert({ text: text });
+    return delta;
+};
+exports.convertTextToDelta = convertTextToDelta;
 var convertDeltaToHtml = function (delta) {
     if (!quill) {
         quill = getQuill();
@@ -47,4 +47,13 @@ var convertDeltaToHtml = function (delta) {
     return html;
 };
 exports.convertDeltaToHtml = convertDeltaToHtml;
+var convertDeltaToText = function (delta) {
+    if (!quill) {
+        quill = getQuill();
+    }
+    quill.setContents(delta);
+    var html = quill.getText();
+    return html;
+};
+exports.convertDeltaToText = convertDeltaToText;
 //# sourceMappingURL=index.js.map

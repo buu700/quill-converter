@@ -41,21 +41,21 @@ const getQuill: () => Quill = typeof document === 'object' ?
 
 let quill: Quill|undefined;
 
-export const convertTextToDelta = (text: string) : Delta => {
-	if (!quill) {
-		quill = getQuill();
-	}
-
-	const delta = quill.clipboard.convert({text});
-	return delta;
-};
-
 export const convertHtmlToDelta = (html: string) : Delta => {
 	if (!quill) {
 		quill = getQuill();
 	}
 
 	const delta = quill.clipboard.convert({html});
+	return delta;
+};
+
+export const convertTextToDelta = (text: string) : Delta => {
+	if (!quill) {
+		quill = getQuill();
+	}
+
+	const delta = quill.clipboard.convert({text});
 	return delta;
 };
 
@@ -67,5 +67,16 @@ export const convertDeltaToHtml = (delta: IQuillDelta | Delta | Op[]) : string =
 	quill.setContents(<any> delta);
 
 	const html = quill.getSemanticHTML();
+	return html;
+};
+
+export const convertDeltaToText = (delta: IQuillDelta | Delta | Op[]) : string => {
+	if (!quill) {
+		quill = getQuill();
+	}
+
+	quill.setContents(<any> delta);
+
+	const html = quill.getText();
 	return html;
 };
