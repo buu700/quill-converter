@@ -12,7 +12,7 @@ const getQuill: () => Quill = typeof document === 'object' ?
 		const div = document.createElement('div');
 		div.style.display = 'none';
 		document.body.appendChild(div);
-		return new (require('quill'))(div);
+		return new (require('quill').default)(div);
 	} :
 	() => {
 		const fs = eval('require')('fs');

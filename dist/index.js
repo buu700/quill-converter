@@ -6,7 +6,7 @@ var getQuill = typeof document === 'object' ?
         var div = document.createElement('div');
         div.style.display = 'none';
         document.body.appendChild(div);
-        return new (require('quill'))(div);
+        return new (require('quill').default)(div);
     } :
     function () {
         var fs = eval('require')('fs');
